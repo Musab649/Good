@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نظام كاشير المسالخ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- شاشة الترحيب -->
+  <div id="splash" class="section active">
+    <h1 class="blinking">مرحباً بكم في نظام إدارة الفواتير بمسالخ الظفرة</h1>
+    <img id="splashLogo" src="" alt="الشعار" style="max-width: 200px; display: block; margin: 20px auto;">
+  </div>
+
+  <!-- شاشة تسجيل الدخول -->
+  <div id="login" class="section">
+    <h2>تسجيل الدخول</h2>
+    <label>الرقم الوظيفي:</label>
+    <input type="text" id="employeeId" />
+    <button onclick="login()">دخول</button>
+    <button onclick="closeProgram()">إلغاء</button>
+  </div>
+
+  <!-- الداشبورد -->
+  <div id="dashboard" class="section">
+    <h2>مرحباً <span id="username"></span></h2>
+    <button onclick="showSection('manageUsers')">إدارة المستخدمين</button>
+    <button onclick="showSection('settings')">الإعدادات</button>
+    <button onclick="showSection('dataEntry')">إدخال البيانات</button>
+    <button onclick="showSection('report')">تقرير المتعاملين</button>
+    <button onclick="logout()">تسجيل خروج</button>
+  </div>
+
+  <!-- إدارة المستخدمين -->
+  <div id="manageUsers" class="section">
+    <h2>المستخدمون</h2>
+    <table id="usersTable">
+      <thead>
+        <tr><th>رقم وظيفي</th><th>اسم</th><th>دور</th><th>موقع</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h3>إضافة مستخدم</h3>
+    <input id="newUserId" placeholder="رقم وظيفي">
+    <input id="newUserName" placeholder="اسم">
+    <select id="newUserRole">
+      <option value="admin">مسؤول</option>
+      <option value="user">مستخدم</option>
+    </select>
+    <select id="newUserSite"></select>
+    <button onclick="addUser()">إضافة</button>
+    <button onclick="showSection('dashboard')">رجوع</button>
+  </div>
+
+  <!-- الإعدادات -->
+  <div id="settings" class="section">
+    <h2>الإعدادات</h2>
+    <h3>المواقع</h3>
+    <input id="newSite" placeholder="موقع جديد">
+    <button onclick="addSite()">إضافة</button>
+    <ul id="sitesList"></ul>
+
+    <h3>رفع شعار</h3>
+    <input type="file" accept="image/*" onchange="uploadLogo(event)">
+
+    <h3>أنواع الذبائح</h3>
+    <input id="newAnimal" placeholder="نوع ذبيحة">
+    <button onclick="addAnimal()">إضافة</button>
+    <ul id="animalsList"></ul>
+
+    <h3>أنواع التقطيع</h3>
+    <input id="newCutting" placeholder="نوع تقطيع">
+    <button onclick="addCutting()">إضافة</button>
+    <ul id="cuttingsList"></ul>
+
+    <h3>تعيين الأسعار</h3>
+    <select id="priceAnimal"></select>
+    <select id="priceCutting"></select>
+    <input id="priceValue" type="number" placeholder="السعر">
+    <button onclick="setPrice()">حفظ السعر</button>
+
+    <button onclick="showSection('dashboard')">رجوع</button>
+  </div>
+
+  <!-- إدخال البيانات -->
+  <div id="dataEntry" class="section">
+    <h2 id="siteTitle"></h2>
+    <label>رقم الفاتورة:</label>
+    <input id="invoiceNumber" readonly>
+
+    <label>رقم التليفون:</label>
+    <input id="phone">
+
+    <label>اسم المتعامل:</label>
+    <input id="clientName">
+
+    <label>نوع الذبيحة:</label>
+    <select id="animalType" onchange="updatePrice()"></select>
+
+    <label>نوع التقطيع:</label>
+    <select id="cuttingType" onchange="updatePrice()"></select>
+
+    <label>عدد الذبائح:</label>
+    <input id="quantity" type="number" value="1" min="1" onchange="updatePrice()">
+
+    <label>سعر الوحدة:</label>
+    <input id="unitPrice" readonly>
+
+    <label>الإجمالي:</label>
+    <input id="totalPrice" readonly>
+
+    <button onclick="saveInvoice()">إضافة</button>
+    <button onclick="showSection('dashboard')">رجوع</button>
+  </div>
+
+  <!-- التقرير -->
+  <div id="report" class="section">
+    <h2>تقرير المتعاملين</h2>
+    <table id="reportTable">
+      <thead>
+        <tr>
+          <th>رقم</th><th>اسم</th><th>رقم الهاتف</th><th>الذبيحة</th>
+          <th>التقطيع</th><th>العدد</th><th>السعر</th><th>الإجمالي</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="showSection('dashboard')">رجوع</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
