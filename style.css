@@ -1,0 +1,28 @@
+body {
+  direction: rtl;
+  font-family: Arial, sans-serif;
+  background: #f3f3f3;
+  margin: 0; padding: 20px;
+}
+
+.section { display: none; }
+
+.section.active { display: block; }
+
+h2 { text-align: center; }
+
+input, select {
+  width: 100%; margin: 5px 0; padding: 8px;
+}
+
+button {
+  margin: 5px; padding: 10px 20px;
+  background: #3498db; color: #fff; border: none; cursor: pointer;
+}
+
+button:hover { background: #2980b9; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+
+ul { list-style: none; padding: 0; }
